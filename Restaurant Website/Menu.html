@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Culinary Fusion Delights Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background:linear-gradient(to right, #74ece2, #abe4ab);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: aliceblue;
+            text-decoration: none;
+            float:left;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .menu-item {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Creates a grid with two columns */
+            gap: 20px; /* Adds a gap between the columns */
+        }
+
+        .menu-category {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+            border: 1px solid #ccc; /* Optional: Adds a border to each menu category for better separation */
+            padding: 10px;
+        }
+
+        /* Optional: Adjust the width of the images to fit within the grid */
+        .menu-category img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .menu-description {
+            margin-top: 5px;
+            color: #777;
+        }
+
+        .item-name {
+            margin-top: 0;
+        }
+
+        .item-price {
+            margin-bottom: 0;
+        }
+
+        #add-to-cart {
+            background-color: red;
+            color: #abe4ab;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-category');
+            const cart = document.getElementById('cart');
+            const cartList = document.getElementById('cart-list');
+            let itemCount = 0;
+            let totalPrice = 0;
+    
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const itemName = button.dataset.item;
+            const item = document.querySelector(`.menu-category[data-item="${itemName}"]`);
+            const itemPrice = item.querySelector('.item-price').innerText;
+    
+            // Create new list item for cart
+            const cartItem = document.createElement('li');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `            
+            <div class="cart-item-details">
+                <h3>${itemName}</h3>
+                <p class="item-price">${itemPrice}</p>
+                <button class="remove-item">Remove</button>
+            </div>
+            `;
+    
+            // Add event listener to remove item button
+            const removeItemButton = cartItem.querySelector('.remove-item');
+            removeItemButton.addEventListener('click', () => {
+            cartItem.remove();
+            updateItemCount2();
+            updateTotalPrice();
+            });
+    
+            // Add cart item to cart list
+            cartList.appendChild(cartItem);
+            updateItemCount();
+            updateTotalPrice();
+        });
+        });
+    
+        // Increase item count in menu
+        function updateItemCount() {
+        itemCount++;
+        const itemCountElement = document.getElementById('item-count');
+        itemCountElement.innerText = `Items in Cart: ${itemCount}`;
+        itemCountElement.style.animation = 'fadeIn 0.5s';
+        setTimeout(() => {
+            itemCountElement.style.animation = '';
+        }, 500);
+        }
+
+        // Decrease item count in menu
+        function updateItemCount2() {
+            itemCount--;
+            const itemCountElement = document.getElementById('item-count');
+            itemCountElement.innerText = `Items in Cart: ${itemCount}`;
+            itemCountElement.style.animation = 'fadeIn 0.5s';
+            setTimeout(() => {
+            itemCountElement.style.animation = '';
+            }, 500);
+        }
+    
+        // Update total price
+        function updateTotalPrice() {
+            totalPrice = 0;
+            const itemPrices = document.querySelectorAll('.cart-item .item-price');
+            itemPrices.forEach(price => {
+            totalPrice += parseFloat(price.innerText.replace('$', ''));
+            });
+            const totalPriceElement = document.getElementById('total-price');
+            totalPriceElement.innerText = `Total: $${totalPrice.toFixed(2)}`;
+            totalPriceElement.style.animation = 'fadeIn 0.5s';
+            setTimeout(() => {
+            totalPriceElement.style.animation = '';
+            }, 500);
+        }
+
+        // Checkout functionality
+        const checkoutButton = document.getElementById('checkout-button');
+        checkoutButton.addEventListener('click', () => {
+            if (itemCount === 0) {
+            alert('Your cart is empty!');
+            return;
+            }
+            alert(`Thank you for your order! Your total is $${totalPrice.toFixed(2)}.`);
+            emptyCart();
+        });
+        
+        // Empty cart
+        function emptyCart() {
+            cartList.innerHTML = '';
+            itemCount = 0;
+            totalPrice = 0;
+            updateItemCount();
+            updateItemCount2();
+            updateTotalPrice();
+        }
+    });
+    </script>
+</head>
+<body>
+    <a href="r&bhome.html">Home</a>
+    <header>
+        <h1>Culinary Fusion Delights</h1>
+        <p>Experience the unexpected and delightful combinations!</p>
+    </header>
+
+    <section>
+        <div class="menu-item" >
+            <h2>Lunch Selections</h2><br>
+            <div class="menu-category" data-item="Grilled Cheese Sandwich">
+                <img src="sand.jpg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">1. Grilled Cheese Sandwich</h3>
+                    <p>Gooey melted cheese embraced by crispy tortillas, <br>a symphony of flavors in every bite.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Grilled Cheese Sandwich">Add to Cart</button><br>
+                </div>
+            </div>
+            <div class="menu-category" data-item="Sushi Burrito Bowl">
+                <img src="sushi.jpeg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">2. Sushi Burrito Bowl</h3>
+                    <p>A delectable marriage of Japanese and Mexican cuisine, <br>featuring sushi-inspired ingredients in a convenient bowl.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Sushi Burrito Bowl">Add to Cart</button>
+                </div>
+            </div>    
+        </div>
+
+        <div class="menu-item">
+            <h2>Dinner Delights</h2><br>
+            <div class="menu-category" data-item="BBQ Pulled Pork Sushi Rolls"> 
+                <img src="pork.jpg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">1. BBQ Pulled Pork Sushi Rolls</h3>
+                    <p>Experience the best of both worlds with these rolls, <br>where BBQ pulled pork meets the elegance of sushi.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="BBQ Pulled Pork Sushi Rolls">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-category" data-item="Mediterranean Tostada">
+                <img src="pork.jpg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">2. Mediterranean Tostada</h3>
+                    <p>A Mediterranean twist on the traditional tostada, <br>featuring hummus, olives, feta, and fresh veggies.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Mediterranean Tostada">Add to Cart</button>
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <div class="menu-item">
+            <h2>Snack Sensations</h2><br>
+            <div class="menu-category" data-item="Buffalo Chicken Spring Rolls"> 
+                <img src="bb.jpg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">1. Buffalo Chicken Spring Rolls</h3>
+                    <p>Spicy buffalo chicken wrapped in crispy spring roll shells, <br>a delightful appetizer or snack.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Buffalo Chicken Spring Rolls">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <h2>Soups</h2><br>
+            <div class="menu-category" data-item="Miso Minestrone Fusion Soup"> 
+                <img src="mine.jpeg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">1. Miso Minestrone Fusion Soup</h3>
+                    <p>A harmonious blend of Japanese miso and Italian minestrone, <br>a comforting bowl of global flavors.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Miso Minestrone Fusion Soup">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Repeat similar structure for soup items -->
+        </div>
+
+        <div class="menu-item">
+            <h2>Dessert Delights</h2><br>
+            <div class="menu-category" data-item="Matcha Tiramisu Tacos"> 
+                <img src="tacos.jpeg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">1. Matcha Tiramisu Tacos</h3>
+                    <p>A sweet take on tacos with layers of matcha-infused tiramisu filling.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Matcha Tiramisu Tacos">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <h2>Beverages</h2><br>
+            <div class="menu-category" data-item="Mango Mint Margarita">
+                <img src="manho.jpg" alt="">
+                <div class="menu-description">
+                    <h3 class="item-name">1. Mango Mint Margarita </h3>
+                    <p>A refreshing blend of mango, mint, and tequila, <br>the perfect complement to our culinary fusion delights.</p>
+                    <p class="item-price">$9.99</p>
+                    <button class="add-to-cart" data-item="Mango Mint Margarita">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Repeat similar structure for beverage items -->
+        </div>
+        <br><br><br>
+    </section>
+
+    <section id="cart">
+        <h2>Cart</h2>
+        <ul id="cart-list"></ul>
+        <div id="item-count">Items in Cart: 0</div><div id="total-price">Total: $0.00</div>
+        <button id="checkout-button">Checkout</button>
+    </section>
+</body>
+</html>

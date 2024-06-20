@@ -1,0 +1,142 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    width: 100%;
+}
+
+header h1{
+    color:aquamarine;
+    animation: stampAnimation 2s ease-in-out ;
+}
+@keyframes stampAnimation {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide {
+      0% {
+        transform: translateX(-100%); /* Start off the screen on the left */
+      }
+      100% {
+        transform: translateX(0); /* End on the screen */
+      }
+    }
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+    
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 40px;
+    /* background: linear-gradient(to right, #74ece2, #abe4ab); */
+    background: #f9f9f9;
+}
+
+.hero {
+    text-align: center;
+    animation: slide 1s ease;
+}
+
+#menu {
+    background-color: rgb(202, 73, 38);
+}
+
+.menu-item {
+    margin-bottom: 20px;
+}
+
+.menu-item img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+    align-items: center;
+    animation: slide 1s ease;    
+}
+
+#options {
+    background-color: #4dc2c8;
+    padding: 40px;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.option {
+    margin-bottom: 20px;
+}
+
+#about {
+    background-color: beige;
+    text-align: center;
+    font-family: cursive;
+    font-style: italic;
+    font-size: large;
+}
+
+#contact {
+    background-color: #9f4d54;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+h1 {
+    color: #72383d;
+}
+
+.intro {
+    color: white;
+}
+
+#dine {
+    margin: 20px 40px 20px 40px;
+    border: solid black;
+    background-color: beige;
+}
+
+#deliver {
+    margin: 20px 40px 20px 40px;
+    border: solid black;
+    background-color: beige;
+}

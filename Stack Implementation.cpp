@@ -95,7 +95,7 @@ void Stack::checkParenthesis()
 		}
 	}
 	if(isEmpty()==1 && flag==0)
-		cout<<"\nExpresseion is Well Parenthesized.";
+		cout<<"\nExpression is Well Parenthesized.";
 	else
 		cout<<"\nExpression is not Well Parenthesized.";
 }
